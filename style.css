@@ -1,0 +1,36 @@
+*{
+margin:0;
+padding:0;
+}
+
+html{height:2000px;}
+
+/*【v1导航栏】*/
+#v1{
+padding:10px;
+text-align: center;/*元素对齐*/	
+position: fixed;
+width: 100vw;
+background: rgba(0,0,0,0.8);
+-webkit-user-select: none;/*元素禁止选中*/	
+-webkit-backdrop-filter: saturate(180%) blur(20px);/*透过背景看其他元素模糊，自身元素不模糊*/
+backdrop-filter:saturate(180%) blur(20px);		
+z-index: 9999;
+}
+#v1 > a{
+margin:18px;
+color:rgba(255,255,255,0.8);
+text-decoration: none;/*去除a标签下划线*/
+}
+#v1 > a:hover{
+color:rgba(255,255,255,1);
+}
+
+
+
+
+
+
+
+
+

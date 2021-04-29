@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://www.jq22.com/code148 -->
+<html xmlns:wb="http://open.weibo.com/wb"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>神经网络的可视化</title>
+<meta name="description" content="神经网络的可视化">
+<meta name="keywords" content="神经网络的可视化，代码">
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<link rel="Shortcut icon" href="https://www.jq22.com/favicon.ico">
+
+<link href="./index_files/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="./index_files/font-awesome.min.css" rel="stylesheet" media="screen">
+<script src="./index_files/push.js.下载"></script><script src="./index_files/hm.js.下载"></script><script src="./index_files/jquery.min.js.下载"></script>
+<script src="./index_files/bootstrap.min.js.下载"></script>
+<script src="./index_files/jquery.qrcode.min.js.下载"></script>
+<script type="text/javascript" src="./index_files/m.js.下载" charset="gbk"></script>
+<!--[if lt IE 9]>
+ 	<script src="/js/respond.min.js"></script> 
+	<script src="/js/html5shiv.min.js"></script>    
+<![endif]-->
+<link href="./index_files/my.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" type="text/css" href="./index_files/codepf.css">
+<link rel="stylesheet" href="./index_files/docs.css">
+<script>
+    var n = 1; var aaa = 1;
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="popover"]').popover({ trigger: 'hover' })
+        $('[data-spy="scroll"]').each(function () {
+            var $spy = $(this).scrollspy('refresh')
+        })
+    })
+</script>
+<script src="./index_files/codemirror.min.js.下载"></script>
+<script src="./index_files/codjs.js.下载"></script>
+<script src="./index_files/f.js.下载"></script>
+<style>
+textarea{color:#ffffff;}.dmdown{width:100px;height:34px;background-color:rgba(0,0,0,0.6);line-height:34px;text-align:center;color:#fff;font-size:13px;position:fixed;top:50px;right:0px;z-index:99;cursor:pointer}.dmdown:hover{background-color:#1568ff;}.modal{font-family:"微软雅黑"}.modal-body{text-align:center;font-size:16px;line-height:30px}.ktts,.kttserr,.ktts2{color:#00ca3c;display:none}.kttserr{color:#ff0000}.foot{font-weight:normal}.dfx-z{display:none;position:absolute;top:153px;left:40px;background-color:#fff;height:35px;width:220px;z-index:999;padding-left:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;}.dfx:hover .dfx-z{display:block;}.CodeMirror-scrollbar-filler{background:#2c2e2f;}@media screen and (max-width:900px){.mm{left:0px;}.output{position:relative;overflow:hidden;width:100%;height:100%;}.editor_pane{width:100%;max-width:100%;}.codebut{position:fixed;top:50px;left:0px;width:40px;opacity:.7;z-index:99;height:auto;}}
+ .bdsharebuttonbox{zoom:1;position:relative}.bdsharebuttonbox.ttqq,.bdsharebuttonbox.ttwx,.bdsharebuttonbox.ttqzone,.bdsharebuttonbox.ttbdhome,.bdsharebuttonbox.ttsina,.bdsharebuttonbox.ttbaidu,.bdsharebuttonbox.ttrenren,.bdsharebuttonbox.tttqq,.bdsharebuttonbox.tthuaban,.bdsharebuttonbox.ttfbook,.bdsharebuttonbox.ttmore{background-repeat:no-repeat;background-image:url(img/fxtb.png);background-position:0px 0px}.bdsharebuttonbox{float:left;font-size:18px;padding-left:25px;line-height:24px;height:24px;background-repeat:no-repeat;cursor:pointer;margin:0px}.bdsharebuttonbox.ttwx{background-position:0px-24px}.bdsharebuttonbox.ttqzone{background-position:0px-48px}.bdsharebuttonbox.ttsina{background-position:0px-96px}.bdsharebuttonbox.tttqq{background-position:0px-120px}.bdsharebuttonbox{zoom:1}.bdsharebuttonbox:after{content:".";visibility:hidden;display:block;height:0;clear:both}.bdsharebuttonbox a,.bdsharebuttonbox.bds_more{float:left;font-size:18px;padding-left:25px;line-height:24px;height:24px;background-repeat:no-repeat;cursor:pointer;margin:6px 6px 6px 0}.bdsharebuttonbox a:hover{color:#333;opacity:.8;filter:alpha(opacity=80)}.bdsharebuttonbox.bds_more{color:#333;float:left}.bdsharebuttonbox.tttqq{background-position:0px-144px}.bdsharebuttonbox.tthuaban{background-position:0px-168px}.bdsharebuttonbox.ttfbook{background-position:0px-192px}#fxcode{position:absolute;width:200px;height:220px;top:35px;display:none;background-color:#fff;border:1px solid#CFCFCF;padding:10px;font-size:12px;line-height:14px;border-radius:5px}.f{float:left}.r{float:right}.fxjg{padding-bottom:5px}#fxcolse:hover{color:#FF7E00}
+    .tacode {
+    width: 60%;
+    height: auto;
+    padding: 5px;
+    background-color: rgba(0,0,0,0.6);
+    line-height: 16px;
+    text-align: right;
+    color: #fff;
+    font-size: 12px;
+    position: fixed;
+    bottom: 32px;
+    right: 0px;
+    z-index: 99;
+    cursor: pointer;
+    background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#d9000000',GradientType=1 ); /* IE6-9 */
+    }
+        .tacode a {
+            display:inline-block;padding: 5px 7px 0px 0px;font-size: 13px;color: rgba(255, 255, 255, .2);transition:all .7s ease 0s;
+        }
+         .tacode a:hover{
+            color: #00ccff;
+        }
+</style>
+</head>
+<body data-spy="scroll" data-target=".navbar-example" style="">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+<a class="navbar-logo" href="https://www.jq22.com/"><img src="./index_files/logo.png" height="100%" alt="jQuery插件,jQuery,jQuery特效.jQuery ui,jQuery 教程,css3,网页特效,JS特效"></a> </div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-right">
+<li><a href="https://www.jq22.com/webide"><i class="fa fa-edit"></i> 在线编辑器</a></li>
+<li><a href="https://www.jq22.com/daima"><i class="fa fa-code"></i> 在线代码</a></li>
+<li><a href="https://www.jq22.com/textDifference"><i class="fa fa-balance-scale" aria-hidden="true"></i> 文本比较</a></li>
+<li><a href="https://www.jq22.com/jquery-info122"><i class="fa fa-download"></i> jQuery下载</a></li>
+<li><a href="https://www.jq22.com/jquery/jquery.html" target="_blank"><i class="fa fa-ship" aria-hidden="true"></i> 前端库</a></li>
+<li><a href="https://www.jq22.com/chm/jquery/index.html" target="_blank"><i class="fa fa-book"></i> 在线手册</a></li>
+<li style="background-color:#22363c"><a href="https://www.jq22.com/myhome" id="grzx"><i class="fa fa-user-secret"></i> 个人中心</a></li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<div id="wrap" class="mm">
+<div style="width:100%; height:100%">
+<div id="editor_pane" class="editor_pane">
+<div id="tz" class="handler"></div>
+<div class="dmdown"><i class="fa fa-cloud-download" aria-hidden="true"></i> 下载代码</div>
+<div class="codebut">
+<li id="b1">html</li>
+<li id="b2">css</li>
+<li id="b3">js</li>
+<li onclick="dmsc()" style="background-color:#793030; margin-top:10px" title="收藏"><i class="fa fa-heart"></i></li>
+<li class="dfx" title="分享"><i class="fa fa-share-alt" aria-hidden="true"></i>
+<div class="dfx-z">
+<div class="bdsharebuttonbox" data-tag="share_1">
+<a class="ttqq" data-cmd="sqq" title="分享到QQ好友"></a>
+<a class="ttwx" data-cmd="weixin" href="https://www.jq22.com/code148#"></a>
+<a class="ttqzone" data-cmd="qzone"></a>
+<a class="ttsina" data-cmd="tsina"></a>
+<a class="tthuaban" data-cmd="huaban"></a>
+<a class="ttfbook" data-cmd="fbook"></a>
+<div id="fxcode"><div class="f fxjg">分享到微信朋友圈</div><div id="fxcolse" class="r fxjg"><b>X</b></div><canvas width="175" height="175"></canvas></div>
+</div>
+</div>
+</li>
+</div>
+<ul id="a0">
+<div class="codets">html</div>
+<textarea id="testcode" name="testcode" style="display: none;">&lt;canvas id=c&gt;&lt;/canvas&gt;</textarea><div class="CodeMirror cm-s-ambiance"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 36px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 32px; margin-bottom: -14px; border-right-width: 16px; min-height: 27px; min-width: 161px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 19px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">canvas</span> <span class="cm-attribute">id</span>=<span class="cm-string">c</span><span class="cm-tag cm-bracket">&gt;&lt;/</span><span class="cm-tag">canvas</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 16px; width: 1px; border-bottom: 0px solid transparent; top: 27px;"></div><div class="CodeMirror-gutters" style="height: 43px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 31px;"></div></div></div></div>
+<script>
+				        var htmleditor = CodeMirror.fromTextArea($('#testcode')[0], {
+	                              lineNumbers: true,
+	                              mode: 'text/html',
+	                              theme: 'monokai',
+	                              theme: 'ambiance'
+	                            });	
+                            </script>
+</ul>
+<ul id="a1">
+<div class="codets">css</div>
+<textarea id="csscode" name="csscode" style="display: none;">canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}</textarea><div class="CodeMirror cm-s-ambiance"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 36px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 32px; margin-bottom: -14px; border-right-width: 16px; min-height: 103px; min-width: 168px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>5</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 19px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag">canvas</span> {</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">position</span>: <span class="cm-atom">absolute</span>;</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">top</span>: <span class="cm-number">0</span>;</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">left</span>: <span class="cm-number">0</span>;</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -32px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 16px; width: 1px; border-bottom: 0px solid transparent; top: 103px;"></div><div class="CodeMirror-gutters" style="height: 119px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 31px;"></div></div></div></div>
+<script>
+				        var csseditor = CodeMirror.fromTextArea($('#csscode')[0], {
+	                              lineNumbers: true,
+	                              mode: 'css',
+	                              theme: 'monokai',
+	                              theme: 'ambiance'
+	                            });	
+                            </script>
+</ul>
+<ul id="a2">
+<div class="codets">JavaScript</div>
+<textarea id="jscode" name="jscode" style="display: none;">var w = c.width = window.innerWidth,
+	h = c.height = window.innerHeight,
+	ctx = c.getContext('2d'),
+
+	opts = {
+
+		range: 180,
+		baseConnections: 3,
+		addedConnections: 5,
+		baseSize: 5,
+		minSize: 1,
+		dataToConnectionSize: .4,
+		sizeMultiplier: .7,
+		allowedDist: 40,
+		baseDist: 40,
+		addedDist: 30,
+		connectionAttempts: 100,
+
+		dataToConnections: 1,
+		baseSpeed: .04,
+		addedSpeed: .05,
+		baseGlowSpeed: .4,
+		addedGlowSpeed: .4,
+
+		rotVelX: .003,
+		rotVelY: .002,
+
+		repaintColor: '#111',
+		connectionColor: 'hsla(200,60%,light%,alp)',
+		rootColor: 'hsla(0,60%,light%,alp)',
+		endColor: 'hsla(160,20%,light%,alp)',
+		dataColor: 'hsla(40,80%,light%,alp)',
+
+		wireframeWidth: .1,
+		wireframeColor: '#88f',
+
+		depth: 250,
+		focalLength: 250,
+		vanishPoint: {
+			x: w / 2,
+			y: h / 2
+		}
+	},
+
+	squareRange = opts.range * opts.range,
+	squareAllowed = opts.allowedDist * opts.allowedDist,
+	mostDistant = opts.depth + opts.range,
+	sinX = sinY = 0,
+	cosX = cosY = 0,
+
+	connections = [],
+	toDevelop = [],
+	data = [],
+	all = [],
+	tick = 0,
+	totalProb = 0,
+
+	animating = false,
+
+	Tau = Math.PI * 2;
+
+ctx.fillStyle = '#222';
+ctx.fillRect(0, 0, w, h);
+ctx.fillStyle = '#ccc';
+ctx.font = '50px Verdana';
+ctx.fillText('Calculating Nodes', w / 2 - ctx.measureText('Calculating Nodes').width / 2, h / 2 - 15);
+
+window.setTimeout(init, 4); // to render the loading screen
+
+function init() {
+
+	connections.length = 0;
+	data.length = 0;
+	all.length = 0;
+	toDevelop.length = 0;
+
+	var connection = new Connection(0, 0, 0, opts.baseSize);
+	connection.step = Connection.rootStep;
+	connections.push(connection);
+	all.push(connection);
+	connection.link();
+
+	while (toDevelop.length &gt; 0) {
+
+		toDevelop[0].link();
+		toDevelop.shift();
+	}
+
+	if (!animating) {
+		animating = true;
+		anim();
+	}
+}
+
+function Connection(x, y, z, size) {
+
+	this.x = x;
+	this.y = y;
+	this.z = z;
+	this.size = size;
+
+	this.screen = {};
+
+	this.links = [];
+	this.probabilities = [];
+	this.isEnd = false;
+
+	this.glowSpeed = opts.baseGlowSpeed + opts.addedGlowSpeed * Math.random();
+}
+Connection.prototype.link = function() {
+
+	if (this.size &lt; opts.minSize)
+		return this.isEnd = true;
+
+	var links = [],
+		connectionsNum = opts.baseConnections + Math.random() * opts.addedConnections | 0,
+		attempt = opts.connectionAttempts,
+
+		alpha, beta, len,
+		cosA, sinA, cosB, sinB,
+		pos = {},
+		passedExisting, passedBuffered;
+
+	while (links.length &lt; connectionsNum &amp;&amp; --attempt &gt; 0) {
+
+		alpha = Math.random() * Math.PI;
+		beta = Math.random() * Tau;
+		len = opts.baseDist + opts.addedDist * Math.random();
+
+		cosA = Math.cos(alpha);
+		sinA = Math.sin(alpha);
+		cosB = Math.cos(beta);
+		sinB = Math.sin(beta);
+
+		pos.x = this.x + len * cosA * sinB;
+		pos.y = this.y + len * sinA * sinB;
+		pos.z = this.z + len * cosB;
+
+		if (pos.x * pos.x + pos.y * pos.y + pos.z * pos.z &lt; squareRange) {
+
+			passedExisting = true;
+			passedBuffered = true;
+			for (var i = 0; i &lt; connections.length; ++i)
+				if (squareDist(pos, connections[i]) &lt; squareAllowed)
+					passedExisting = false;
+
+			if (passedExisting)
+				for (var i = 0; i &lt; links.length; ++i)
+					if (squareDist(pos, links[i]) &lt; squareAllowed)
+						passedBuffered = false;
+
+			if (passedExisting &amp;&amp; passedBuffered)
+				links.push({
+					x: pos.x,
+					y: pos.y,
+					z: pos.z
+				});
+
+		}
+
+	}
+
+	if (links.length === 0)
+		this.isEnd = true;
+	else {
+		for (var i = 0; i &lt; links.length; ++i) {
+
+			var pos = links[i],
+				connection = new Connection(pos.x, pos.y, pos.z, this.size * opts.sizeMultiplier);
+
+			this.links[i] = connection;
+			all.push(connection);
+			connections.push(connection);
+		}
+		for (var i = 0; i &lt; this.links.length; ++i)
+			toDevelop.push(this.links[i]);
+	}
+}
+Connection.prototype.step = function() {
+
+	this.setScreen();
+	this.screen.color = (this.isEnd ? opts.endColor : opts.connectionColor).replace('light', 30 + ((tick * this.glowSpeed) % 30)).replace('alp', .2 + (1 - this.screen.z / mostDistant) * .8);
+
+	for (var i = 0; i &lt; this.links.length; ++i) {
+		ctx.moveTo(this.screen.x, this.screen.y);
+		ctx.lineTo(this.links[i].screen.x, this.links[i].screen.y);
+	}
+}
+Connection.rootStep = function() {
+	this.setScreen();
+	this.screen.color = opts.rootColor.replace('light', 30 + ((tick * this.glowSpeed) % 30)).replace('alp', (1 - this.screen.z / mostDistant) * .8);
+
+	for (var i = 0; i &lt; this.links.length; ++i) {
+		ctx.moveTo(this.screen.x, this.screen.y);
+		ctx.lineTo(this.links[i].screen.x, this.links[i].screen.y);
+	}
+}
+Connection.prototype.draw = function() {
+	ctx.fillStyle = this.screen.color;
+	ctx.beginPath();
+	ctx.arc(this.screen.x, this.screen.y, this.screen.scale * this.size, 0, Tau);
+	ctx.fill();
+}
+
+function Data(connection) {
+
+	this.glowSpeed = opts.baseGlowSpeed + opts.addedGlowSpeed * Math.random();
+	this.speed = opts.baseSpeed + opts.addedSpeed * Math.random();
+
+	this.screen = {};
+
+	this.setConnection(connection);
+}
+Data.prototype.reset = function() {
+
+	this.setConnection(connections[0]);
+	this.ended = 2;
+}
+Data.prototype.step = function() {
+
+	this.proportion += this.speed;
+
+	if (this.proportion &lt; 1) {
+		this.x = this.ox + this.dx * this.proportion;
+		this.y = this.oy + this.dy * this.proportion;
+		this.z = this.oz + this.dz * this.proportion;
+		this.size = (this.os + this.ds * this.proportion) * opts.dataToConnectionSize;
+	} else
+		this.setConnection(this.nextConnection);
+
+	this.screen.lastX = this.screen.x;
+	this.screen.lastY = this.screen.y;
+	this.setScreen();
+	this.screen.color = opts.dataColor.replace('light', 40 + ((tick * this.glowSpeed) % 50)).replace('alp', .2 + (1 - this.screen.z / mostDistant) * .6);
+
+}
+Data.prototype.draw = function() {
+
+	if (this.ended)
+		return --this.ended; // not sre why the thing lasts 2 frames, but it does
+
+	ctx.beginPath();
+	ctx.strokeStyle = this.screen.color;
+	ctx.lineWidth = this.size * this.screen.scale;
+	ctx.moveTo(this.screen.lastX, this.screen.lastY);
+	ctx.lineTo(this.screen.x, this.screen.y);
+	ctx.stroke();
+}
+Data.prototype.setConnection = function(connection) {
+
+	if (connection.isEnd)
+		this.reset();
+
+	else {
+
+		this.connection = connection;
+		this.nextConnection = connection.links[connection.links.length * Math.random() | 0];
+
+		this.ox = connection.x; // original coordinates
+		this.oy = connection.y;
+		this.oz = connection.z;
+		this.os = connection.size; // base size
+
+		this.nx = this.nextConnection.x; // new
+		this.ny = this.nextConnection.y;
+		this.nz = this.nextConnection.z;
+		this.ns = this.nextConnection.size;
+
+		this.dx = this.nx - this.ox; // delta
+		this.dy = this.ny - this.oy;
+		this.dz = this.nz - this.oz;
+		this.ds = this.ns - this.os;
+
+		this.proportion = 0;
+	}
+}
+Connection.prototype.setScreen = Data.prototype.setScreen = function() {
+
+	var x = this.x,
+		y = this.y,
+		z = this.z;
+
+	// apply rotation on X axis
+	var Y = y;
+	y = y * cosX - z * sinX;
+	z = z * cosX + Y * sinX;
+
+	// rot on Y
+	var Z = z;
+	z = z * cosY - x * sinY;
+	x = x * cosY + Z * sinY;
+
+	this.screen.z = z;
+
+	// translate on Z
+	z += opts.depth;
+
+	this.screen.scale = opts.focalLength / z;
+	this.screen.x = opts.vanishPoint.x + x * this.screen.scale;
+	this.screen.y = opts.vanishPoint.y + y * this.screen.scale;
+
+}
+
+function squareDist(a, b) {
+
+	var x = b.x - a.x,
+		y = b.y - a.y,
+		z = b.z - a.z;
+
+	return x * x + y * y + z * z;
+}
+
+function anim() {
+
+	window.requestAnimationFrame(anim);
+
+	ctx.globalCompositeOperation = 'source-over';
+	ctx.fillStyle = opts.repaintColor;
+	ctx.fillRect(0, 0, w, h);
+
+	++tick;
+
+	var rotX = tick * opts.rotVelX,
+		rotY = tick * opts.rotVelY;
+
+	cosX = Math.cos(rotX);
+	sinX = Math.sin(rotX);
+	cosY = Math.cos(rotY);
+	sinY = Math.sin(rotY);
+
+	if (data.length &lt; connections.length * opts.dataToConnections) {
+		var datum = new Data(connections[0]);
+		data.push(datum);
+		all.push(datum);
+	}
+
+	ctx.globalCompositeOperation = 'lighter';
+	ctx.beginPath();
+	ctx.lineWidth = opts.wireframeWidth;
+	ctx.strokeStyle = opts.wireframeColor;
+	all.map(function(item) {
+		item.step();
+	});
+	ctx.stroke();
+	ctx.globalCompositeOperation = 'source-over';
+	all.sort(function(a, b) {
+		return b.screen.z - a.screen.z
+	});
+	all.map(function(item) {
+		item.draw();
+	});
+
+	/*ctx.beginPath();
+	ctx.strokeStyle = 'red';
+	ctx.arc( opts.vanishPoint.x, opts.vanishPoint.y, opts.range * opts.focalLength / opts.depth, 0, Tau );
+	ctx.stroke();*/
+}
+
+window.addEventListener('resize', function() {
+
+	opts.vanishPoint.x = (w = c.width = window.innerWidth) / 2;
+	opts.vanishPoint.y = (h = c.height = window.innerHeight) / 2;
+	ctx.fillRect(0, 0, w, h);
+});
+window.addEventListener('click', init);</textarea><div class="CodeMirror cm-s-ambiance"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 37px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="display: block; bottom: 14px;"><div style="min-width: 1px; height: 6943px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="display: block; right: 14px; left: 33px;"><div style="height: 100%; min-height: 1px; width: 1337px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true" style="display: block; height: 14px; width: 14px;"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 33px; margin-bottom: -14px; border-right-width: 16px; min-height: 6943px; min-width: 1337px; padding-right: 14px; padding-bottom: 14px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"><pre class="CodeMirror-line" role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-keyword">this</span>.<span class="cm-property">screen</span>.<span class="cm-property">color</span> <span class="cm-operator">=</span> (<span class="cm-keyword">this</span>.<span class="cm-property">isEnd</span> <span class="cm-operator">?</span> <span class="cm-variable">opts</span>.<span class="cm-property">endColor</span> : <span class="cm-variable">opts</span>.<span class="cm-property">connectionColor</span>).<span class="cm-property">replace</span>(<span class="cm-string">'light'</span>, <span class="cm-number">30</span> <span class="cm-operator">+</span> ((<span class="cm-variable">tick</span> <span class="cm-operator">*</span> <span class="cm-keyword">this</span>.<span class="cm-property">glowSpeed</span>) <span class="cm-operator">%</span> <span class="cm-number">30</span>)).<span class="cm-property">replace</span>(<span class="cm-string">'alp'</span>, <span class="cm-number">.2</span> <span class="cm-operator">+</span> (<span class="cm-number">1</span> <span class="cm-operator">-</span> <span class="cm-keyword">this</span>.<span class="cm-property">screen</span>.<span class="cm-property">z</span> <span class="cm-operator">/</span> <span class="cm-variable">mostDistant</span>) <span class="cm-operator">*</span> <span class="cm-number">.8</span>);</span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 19px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">w</span> <span class="cm-operator">=</span> <span class="cm-variable">c</span>.<span class="cm-property">width</span> <span class="cm-operator">=</span> <span class="cm-variable">window</span>.<span class="cm-property">innerWidth</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-def">h</span> <span class="cm-operator">=</span> <span class="cm-variable">c</span>.<span class="cm-property">height</span> <span class="cm-operator">=</span> <span class="cm-variable">window</span>.<span class="cm-property">innerHeight</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-def">ctx</span> <span class="cm-operator">=</span> <span class="cm-variable">c</span>.<span class="cm-property">getContext</span>(<span class="cm-string">'2d'</span>),</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-def">opts</span> <span class="cm-operator">=</span> {</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">range</span>: <span class="cm-number">180</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">baseConnections</span>: <span class="cm-number">3</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">addedConnections</span>: <span class="cm-number">5</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">baseSize</span>: <span class="cm-number">5</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">minSize</span>: <span class="cm-number">1</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">dataToConnectionSize</span>: <span class="cm-number">.4</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">sizeMultiplier</span>: <span class="cm-number">.7</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">14</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">allowedDist</span>: <span class="cm-number">40</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">15</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">baseDist</span>: <span class="cm-number">40</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">16</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">addedDist</span>: <span class="cm-number">30</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">17</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">connectionAttempts</span>: <span class="cm-number">100</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">18</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">19</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">dataToConnections</span>: <span class="cm-number">1</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">20</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">baseSpeed</span>: <span class="cm-number">.04</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">21</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">addedSpeed</span>: <span class="cm-number">.05</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">22</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">baseGlowSpeed</span>: <span class="cm-number">.4</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">23</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-property">addedGlowSpeed</span>: <span class="cm-number">.4</span>,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -33px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 22px;">24</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 16px; width: 1px; border-bottom: 14px solid transparent; top: 6943px;"></div><div class="CodeMirror-gutters" style="height: 6973px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 32px;"></div></div></div></div>
+<script>
+				      var jseditor = CodeMirror.fromTextArea($('#jscode')[0], {
+	                              lineNumbers: true,
+	                              mode: 'javascript',
+	                              theme: 'monokai',
+	                              theme: 'ambiance'
+	                            });	
+                            </script>
+</ul>
+</div>
+<div class="output">
+<div class="zz"></div>
+<iframe id="if" src="./index_files/20160419220339.html"></iframe>
+<div class="tacode">
+<a href="https://www.jq22.com/taccode?info=%E7%B2%92%E5%AD%90" target="_blank">
+粒子
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%97%B6%E9%97%B4" target="_blank">
+时间
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%96%87%E5%AD%97" target="_blank">
+文字
+</a>
+<a href="https://www.jq22.com/taccode?info=hover" target="_blank">
+hover
+</a>
+<a href="https://www.jq22.com/taccode?info=canvas" target="_blank">
+canvas
+</a>
+<a href="https://www.jq22.com/taccode?info=3d" target="_blank">
+ 3d
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%B8%B8%E6%88%8F" target="_blank">
+游戏
+</a>
+<a href="https://www.jq22.com/taccode?info=%E9%9F%B3%E4%B9%90" target="_blank">
+音乐
+</a>
+<a href="https://www.jq22.com/taccode?info=%E7%81%AB%E7%84%B0" target="_blank">
+火焰
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%B0%B4%E6%B3%A2" target="_blank">
+水波
+</a>
+<a href="https://www.jq22.com/taccode?info=%E8%BD%AE%E6%92%AD%E5%9B%BE" target="_blank">
+轮播图
+</a>
+<a href="https://www.jq22.com/taccode?info=%E9%BC%A0%E6%A0%87%E8%B7%9F%E9%9A%8F" target="_blank">
+鼠标跟随
+</a>
+<a href="https://www.jq22.com/taccode?info=%E5%8A%A8%E7%94%BB" target="_blank">
+动画
+</a>
+<a href="https://www.jq22.com/taccode?info=css" target="_blank">
+css
+</a>
+<a href="https://www.jq22.com/taccode?info=%E5%8A%A0%E8%BD%BD%E5%8A%A8%E7%94%BB" target="_blank">
+加载动画
+</a>
+<a href="https://www.jq22.com/taccode?info=%E5%AF%BC%E8%88%AA" target="_blank">
+导航
+</a>
+<a href="https://www.jq22.com/taccode?info=%E8%8F%9C%E5%8D%95" target="_blank">
+菜单
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%8C%89%E9%92%AE" target="_blank">
+按钮
+</a>
+<a href="https://www.jq22.com/taccode?info=%E6%BB%91%E5%9D%97" target="_blank">
+滑块
+</a>
+<a href="https://www.jq22.com/taccode?info=tab" target="_blank">
+tab
+</a>
+<a href="https://www.jq22.com/taccode?info=%E5%BC%B9%E5%87%BA%E5%B1%82" target="_blank">
+弹出层
+</a>
+<a href="https://www.jq22.com/taccode?info=%E7%BB%9F%E8%AE%A1%E5%9B%BE" target="_blank">
+统计图
+</a>
+<a href="https://www.jq22.com/taccode?info=svg" target="_blank">
+svg
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="dmts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+<h4 class="modal-title" id="myModalLabel"><i class="fa fa-code"></i> 在线代码下载提示</h4>
+</div>
+<div class="modal-body">
+<i class="fa fa-lightbulb-o"></i> 开通在线代码永久免费下载，需支付20jQ币<br>
+<b>开通后，在线代码模块中所有代码可终身免费下！</b>
+<p class="ktts"><b><i class="fa fa-check-circle" aria-hidden="true"></i> 您已开通在线代码永久免费下载,关闭提示框后，点下载代码可直接下载！<b></b></b></p><b><b>
+<p class="ktts2"><b><i class="fa fa-check-circle" aria-hidden="true"></i> 您已经开通过在线代码永久免费下载<b></b></b></p><b><b>
+<p class="kttserr"><b><i class="fa fa-check-circle" aria-hidden="true"></i> 对不起，您的jQ币不足！可通过发布资源 或<a href="https://www.jq22.com/zxzf.aspx" target="_blank">直接充值获取jQ币</a><b></b></b></p><b><b>
+</b></b></b></b></b></b></div><b><b><b>
+<div id="ktbut" class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+<button type="button" id="kt" class="btn btn-primary">开通下载</button>
+</div>
+</b></b></b></div><b><b><b>
+</b></b></b></div><b><b><b>
+</b></b></b></div><b><b><b>
+<textarea id="head" style="display: none">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;神经网络的可视化-jq22.com&lt;/title&gt;
+&lt;script src="https://www.jq22.com/jquery/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;style&gt;
+</textarea>
+<textarea id="jw">&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+</textarea>
+<textarea id="jw1" style="display: none">&lt;script&gt;
+</textarea>
+<textarea id="jw2" style="display: none">&lt;/script&gt;
+</textarea>
+<textarea id="food" style="display: none">&lt;/body&gt;
+&lt;/html&gt;
+</textarea>
+<script type="text/javascript">
+
+    $(".dmdown").click(function () {
+        var hypd = "726854";
+        if (hypd == "n") {
+            window.location.href = "jq22Signin.aspx";
+        }
+    });
+
+    $(document).ready(function () {
+        var hh = "\n\n";
+        var hh1 = "\n";
+        $("\x2e\x64\x6d\x64\x6f\x77\x6e")["\x63\x6c\x69\x63\x6b"](function () { var hiwoRzQ1 = $("\x23\x68\x65\x61\x64")["\x76\x61\x6c"]() + csseditor["\x67\x65\x74\x56\x61\x6c\x75\x65"]() + $("\x23\x6a\x77")["\x76\x61\x6c"]() + htmleditor["\x67\x65\x74\x56\x61\x6c\x75\x65"]() + hh + $("\x23\x6a\x77\x31")["\x76\x61\x6c"]() + jseditor["\x67\x65\x74\x56\x61\x6c\x75\x65"]() + $("\x23\x6a\x77\x32")["\x76\x61\x6c"]() + hh1 + $("\x23\x66\x6f\x6f\x64")["\x76\x61\x6c"](); var SefNh2 = new Blob([hiwoRzQ1], { type: "\x74\x65\x78\x74\x2f\x70\x6c\x61\x69\x6e\x3b\x63\x68\x61\x72\x73\x65\x74\x3d\x75\x74\x66\x2d\x38" }); $["\x70\x6f\x73\x74"]("\x63\x44\x6f\x77\x6e\x2e\x61\x73\x70\x78", function (QB$Vuyn3) { if (QB$Vuyn3 == "\x79") { var NCCEtTWHl4 = window["\x4d\x61\x74\x68"]["\x72\x61\x6e\x64\x6f\x6d"](); NCCEtTWHl4 = window["\x4d\x61\x74\x68"]["\x63\x65\x69\x6c"](NCCEtTWHl4 * 10000); saveAs(SefNh2, "\x6a\x71\x32\x32" + NCCEtTWHl4 + "\x2e\x68\x74\x6d\x6c"); } else if (QB$Vuyn3 == "\x6e\x6e") { $('\x23\x6d\x79\x4d\x6f\x64\x61\x6c')["\x6d\x6f\x64\x61\x6c"]('\x73\x68\x6f\x77'); } else { $('\x23\x64\x6d\x74\x73')["\x6d\x6f\x64\x61\x6c"]('\x73\x68\x6f\x77'); } }); });
+        $("#kt").click(function () {
+            $.post("cDownzf.aspx", function (data) {
+                if (data == "y") {
+                   $(".ktts").fadeIn();
+                   $("#ktbut").fadeOut();
+                }
+                else if (data == "yy") {
+                    $(".ktts2").fadeIn();
+                }
+                else {
+                    $(".kttserr").fadeIn();
+                }
+            });
+        });
+    });
+    
+	jqbb = "https://www.jq22.com/jquery/jquery-1.10.2.js";
+	function Run() {
+	    var codehtml = htmleditor.getValue();
+	    var codecss = '<style>' + csseditor.getValue() + '</style>';
+	    var codejs = '<scr' + 'ipt>' + jseditor.getValue() + '</scr' + 'ipt>';
+	    var codebb = '<scr' + 'ipt src='+jqbb+'>' + '</scr' + 'ipt>';
+	    var oLdvu_e1 = window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64"]('\x69\x66')["\x63\x6f\x6e\x74\x65\x6e\x74\x57\x69\x6e\x64\x6f\x77"]["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]; oLdvu_e1["\x6f\x70\x65\x6e"](); oLdvu_e1["\x77\x72\x69\x74\x65"](codecss + codebb + codehtml + codejs); oLdvu_e1["\x63\x6c\x6f\x73\x65"]();
+	} Run();
+
+	var NocOLUAPh1 = 1; var bLv2; $("\x74\x65\x78\x74\x61\x72\x65\x61")["\x62\x69\x6e\x64"]("\x69\x6e\x70\x75\x74 \x70\x72\x6f\x70\x65\x72\x74\x79\x63\x68\x61\x6e\x67\x65", function () { NocOLUAPh1 = 1; clearInterval(bLv2); bLv2 = setInterval(Codeshow, 1000); }); function Codeshow() { NocOLUAPh1++; if (NocOLUAPh1 > 2) { clearInterval(bLv2); NocOLUAPh1 = 1; Run(); } }
+    function ycss() {
+        if (typeof localStorage.yanse == 'undefined') {
+            localStorage.yanse = 1;
+        } else {
+            localStorage.yanse = parseInt(localStorage.yanse) + 1;
+        }
+    }
+    var a = "148";
+	function dmsc() {
+	    var yz = $.ajax({
+	        type: 'post',
+	        url: 'shou-daima.aspx',
+	        data: { wz: a },
+	        cache: false,
+	        dataType: 'text',
+	        success: function (data) {
+	            if (data == "m") {
+	                $("#myModal").modal();
+                } else {
+                    ycss();
+	                window.location.href = window.location;
+	                lytjbut.disabled = false;
+	            }
+	        },
+	        error: function () { }
+	    });
+	}
+</script>
+<script type="text/javascript">
+		var j=3;
+		var bb1=0;
+		var arr=['0','0','0'];	
+		$(".codebut li").click(function(){	
+		 	var djz =$(this).index();						
+			if(arr[djz]=='0'){
+				if(j>1)
+				{
+					j=j-1;
+					if(j==2){
+					    $(".editor_pane ul").css("height", "50%");
+					}else if(j==3){
+					    $(".editor_pane ul").css("height", "33.333%");
+					}else if(j==1){
+						$(".editor_pane ul").css("height","100%");
+					}					
+					$("#a"+$(this).index()).css("display","none");
+					$(this).css("background-color", "#303030");
+					$(this).css("color", "#484848");
+					arr[djz]='1';
+				}
+			}
+			else if(arr[djz]=='1') 
+			{
+				j=j+1;
+				if(j==2){
+					$(".editor_pane ul").css("height","50%");	
+				}else if(j==3){
+					$(".editor_pane ul").css("height","33%");	
+				}else if(j==1){
+					$(".editor_pane ul").css("height","100%");
+				}
+				$("#a"+$(this).index()).css("display","block");
+				$(this).css("background-color", "#2f2f2f");
+				$(this).css("color", "#fff");
+				arr[djz] = '0';	
+			}
+			
+        });
+        $(function ()
+        {
+            bindResize(document.getElementById('editor_pane'));
+        });
+        function bindResize(el)
+        {
+            var els = el.style,
+            x = y = 0;
+            $("#tz").mousedown(function (e)
+            {
+				$(".zz").css("display","block");
+                x = e.clientX - el.offsetWidth,
+                el.setCapture ? (
+                    el.setCapture(),
+                    el.onmousemove = function (ev)
+                    {
+                        mouseMove(ev || event);
+                    },
+                    el.onmouseup = mouseUp
+                ) : (
+                    $(document).bind("mousemove", mouseMove).bind("mouseup", mouseUp)
+                );
+                e.preventDefault();
+            });
+			$("#tz").mouseup(function(){
+			  $(".zz").css("display","none");
+			});
+            function mouseMove(e)
+            {				
+				$(".editor_pane").width(e.clientX - x + 'px');
+											     
+            }
+            function mouseUp()
+            {
+                el.releaseCapture ? (
+                    el.releaseCapture(),
+                    el.onmousemove = el.onmouseup = null
+                ) : (
+                    $(document).unbind("mousemove", mouseMove).unbind("mouseup", mouseUp)
+                );
+            }
+        }		
+    </script>
+
+<style>
+    .foot3{text-align:center;position:fixed;bottom:0px;font-size:12px;width:100%;z-index:999;line-height:32px;color:#808080}.foot3 b{font-weight:400;}.foot3 a{color:#808080}.foot3 a:hover{color:#319fe8}.footleft{position:absolute;left:0px;padding-left:10px;}.footright{position:absolute;width:auto;right:0px;padding-right:10px;}.footright span{padding:0px 5px 0px 5px;}@media screen and (max-width:930px){.nggys{display:none}}@media screen and (max-width:1100px){.footright{display:none}.foot3{text-align:right;}}@media screen and (max-width:720px){.footright{display:block;}.foot3 b,.footleft{display:none}}
+</style>
+<nav class="foot foot3 navbar-inverse" style="overflow: hidden;">
+<div class="footleft">2012-2021 jQuery插件库版权所有</div>
+<div class="footright">
+<a href="https://www.jq22.com/label1">jquery插件</a><span>|</span>
+<a href="https://www.jq22.com/work-jq22-tool">jq22工具库</a><span>|</span>
+<a href="https://www.jq22.com/web-article1">网页技术</a><span>|</span>
+<a href="https://www.jq22.com/cooperation.aspx">广告合作</a><span>|</span>
+<a href="https://www.jq22.com/feedback.aspx">在线反馈</a><span>|</span>
+<a href="https://www.jq22.com/copyright.aspx">版权声明</a>
+</div>
+<b><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow">沪ICP备13043785号-1</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33041102000314" target="_blank"><img src="./index_files/batb.png" style="padding-top: 3px;vertical-align: -5px;padding-left:10px"> 浙公网安备 33041102000314号</a></b>
+</nav>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?b3a3fc356d0af38b811a0ef8d50716b8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+<script>
+    var sharrul = window.location.href;
+    var shartitle = "神经网络的可视化";
+    jQuery('#fxcode').qrcode({ render: "canvas", width: 175, height: 175, text: window.location.href }); $(".ttwx").click(function () { $("#fxcode").css("display", "block") }); $("#fxcolse").click(function () { $("#fxcode").css("display", "none") }); $(".ttqq").click(function () { shareqq(shartitle, sharrul) }); $(".ttqzone").click(function () { shareToQq(shartitle, sharrul) }); $(".ttsina").click(function () { shareToXl(shartitle, sharrul) }); $(".tthuaban").click(function () { sharehuaban(shartitle, sharrul, picurl) }); $(".ttfbook").click(function () { sharefb(shartitle, sharrul) }); function shareqq(title, url) { var shareqqzonestring = 'https://connect.qq.com/widget/shareqq/index.html??summary=' + title + '&url=' + url; window.open(shareqqzonestring, 'newwindow', 'height=595,width=785,top=100,left=100') } function shareToQq(title, url) { var shareqqzonestring = 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' + title + '&url=' + url; window.open(shareqqzonestring, 'newwindow', 'height=400,width=400,top=100,left=100') } function shareToXl(title, url) { var sharesinastring = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&content=utf-8&sourceUrl=' + url; window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100') } function sharehuaban(title, url, picurl) { var sharesinastring = 'https://huaban.com/bookmarklet/?title=' + title + '&url=' + url + '&content=utf-8&sourceUrl=' + url + '&media=' + ""; window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100') } function sharefb(title, url) { var sharesinastring = 'https://www.facebook.com/share.php?t=' + title + '&u=' + url + '&content=utf-8&sourceUrl=' + url; window.open(sharesinastring, 'newwindow', 'height=400,width=400,top=100,left=100') }
+</script>
+
+</b></b></b></body></html>
